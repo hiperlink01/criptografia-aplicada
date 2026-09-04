@@ -45,30 +45,18 @@ class NumeroModular:
         return NotImplemented
 
     def inverso_multiplicativo(self) -> 'NumeroModular | None':
-        """
-        calcula o inverso multiplicatico de a modulo m. 
-        retorna None quando o inverso nao existe.
-        """
-
         mdc, x, y = euclides_estendido(self.num, self.mod)
-
         if mdc != 1:
             return None
-        
         return NumeroModular(x % self.mod, self.mod)
 
     def __truediv__(self, other):
-        """
-        Realiza a divisão modular: (a / b) mod m
-        """
         if (self.mod != other.mod) :
             raise ValueError("Os módulos devem ser iguais para a operação.")
-        
         inverso_other = other.inverso_multiplicativo()
-        
         if inverso_other is None:
             raise ValueError(f"O inverso multiplicativo de {other.num_mod} não existe no módulo {other.mod}.")
-        
+
         return self.__mul__(inverso_other)
 
     def congruente(self, other: 'NumeroModular') -> bool:
@@ -77,5 +65,5 @@ class NumeroModular:
         """
         if self.mod != other.mod:
             raise ValueError("Os módulos devem ser iguais para a operação.")
-        
+
         return self.num_mod == other.num_mod
