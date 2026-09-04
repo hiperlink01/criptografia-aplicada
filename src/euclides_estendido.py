@@ -11,20 +11,3 @@ def euclides_estendido(a, b):
     y = x1 - (a // b) * y1
 
     return mdc, x, y 
-
-
-def inverso_multiplicativo(a, m):
-    """
-    calcula o inverso multiplicatico de a modulo m. 
-    retorna None quando o inverso nao existe.
-    """
-    if m <= 0:
-        raise ValueError("o modulo nao pode ser zero")
-    
-    mdc, x, y = euclides_estendido(a, m)
-
-    if mdc != 1:
-        return None
-    
-    return x % m
-
