@@ -11,14 +11,14 @@ class NumeroModular:
         self.mod = mod
 
     def __repr__(self):
-        return f"NumeroModular({self.num_mod}, {self.mod})"
+        return f"NumeroModular({self.num}, {self.mod})"
 
     def __str__(self):
-        return f"{self.num_mod} (mod {self.mod})"
+        return f"{self.num} (mod {self.mod})"
 
     def __eq__(self, other):
         if isinstance(other, NumeroModular):
-            return self.num_mod == other.num_mod and self.mod == other.mod
+            return self.num == other.num and self.mod == other.mod
         return False
 
     """Implementa operações modulares básicas: soma, subtração e multiplicação."""
@@ -57,7 +57,6 @@ class NumeroModular:
         
         return NumeroModular(x % self.mod, self.mod)
 
-    @staticmethod
     def __truediv__(self, other):
         """
         Realiza a divisão modular: (a / b) mod m
@@ -65,9 +64,18 @@ class NumeroModular:
         if (self.mod != other.mod) :
             raise ValueError("Os módulos devem ser iguais para a operação.")
         
-        inverso_b = self.inverso_multiplicativo()
+        inverso_other = other.inverso_multiplicativo()
         
-        if inverso_b is None:
+        if inverso_other is None:
             raise ValueError(f"O inverso multiplicativo de {other.num_mod} não existe no módulo {other.mod}.")
         
-        return self.__mul__(inverso_b)
+        return self.__mul__(inverso_other)
+
+    def congruente(self, other: 'NumeroModular') -> bool:
+        """
+        Verifica se dois números modulares são congruentes.
+        """
+        if self.mod != other.mod:
+            raise ValueError("Os módulos devem ser iguais para a operação.")
+        
+        return self.num_mod == other.num_mod
