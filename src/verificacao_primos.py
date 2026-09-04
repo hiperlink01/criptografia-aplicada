@@ -1,33 +1,10 @@
-"""
-Biblioteca Criptográfica - SecureDocs
-Missão 1: Fundamentos Matemáticos (Aritmética Modular e Números Primos)
-"""
 import random
 
-class AritmeticaModular:
-    """Implementa as operações fundamentais em espaços modulares."""
-    
-    @staticmethod
-    def somar(a: int, b: int, m: int) -> int:
-        """Realiza a adição modular: (a + b) mod m"""
-        return (a + b) % m
-
-    @staticmethod
-    def subtrair(a: int, b: int, m: int) -> int:
-        """Realiza a subtração modular: (a - b) mod m"""
-        return (a - b) % m
-
-    @staticmethod
-    def multiplicar(a: int, b: int, m: int) -> int:
-        """Realiza a multiplicação modular: (a * b) mod m"""
-        return (a * b) % m
-
-
-class NumerosPrimos:
+class VerificaPrimos:
     """Implementa métodos para verificação e geração de números primos."""
     
     @staticmethod
-    def is_prime_simples(n: int) -> bool:
+    def simples(n: int) -> bool:
         """
         Verificação determinística (Divisão por tentativa).
         Recomendado apenas para fins didáticos e números pequenos.
@@ -44,7 +21,7 @@ class NumerosPrimos:
         return True
 
     @staticmethod
-    def is_prime_miller_rabin(n: int, k: int = 40) -> bool:
+    def miller_rabin(n: int, k: int = 40) -> bool:
         """
         Verificação probabilística de Miller-Rabin.
         Padrão da indústria para chaves criptográficas reais.
@@ -53,6 +30,7 @@ class NumerosPrimos:
             n: Número a ser testado.
             k: Número de rodadas de teste (40 garante margem de erro desprezível).
         """
+
         if n == 2 or n == 3: return True
         if n <= 1 or n % 2 == 0: return False
 
